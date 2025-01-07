@@ -1,0 +1,113 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.wrapper {
+  padding: 0 50px;
+}
+
+.clock {
+  width: 700px;
+  height: 700px;
+  position: relative;
+  border-radius: 50%;
+  border:  1px solid white;
+  margin: 0 auto;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 50%;
+  background-color: black;
+  z-index: 100;
+}
+
+.number-container {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+}
+
+.number {
+  margin-left: -10px;
+}
+
+.hour-hand {
+  position: absolute;
+  width: 8px;
+  height: 135px;
+  background-color: black;
+  top: 216px;
+  left: 50%;
+  transform-origin: 50% 133px;
+  margin-left: -4px;
+  border-radius: 4px;
+}
+.minute-hand {
+  position: absolute;
+  width: 4px;
+  height: 235px;
+  background-color: black;
+  top: 116px;
+  left: 50%;
+  transform-origin: 50% 235px;
+  margin-left: -2px;
+  border-radius: 2px;
+}
+.second-hand {
+  position: absolute;
+  width: 2px;
+  height: 285px;
+  background-color: rgb(255, 78, 55);
+  top: 67px;
+  left: 50%;
+  transform-origin: 50% 284px;
+  margin-left: -1px;
+  border-radius: 1px;
+}
