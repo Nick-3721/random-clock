@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import ClockHand from './ClockHand';
+import ClockFace from './ClockFace'
 
 export function Clock() {
   const numbers = Array.from({ length: 60 }, (_, i) => i + 1);
   const [shuffledNumbers, setShuffledNumbers] = useState(numbers);
-
-
   const [time, setTime] = useState(new Date())
-  const [handPosition, setHandPosition] = useState({})
 
 
   useEffect(() => {
@@ -17,9 +16,6 @@ export function Clock() {
     return () => clearInterval(interval)
   }, [numbers])
   
-  // console.log(time.getHours())
-  // console.log(shuffledNumbers)
-
   // random clock position
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -39,36 +35,13 @@ export function Clock() {
   const minutePosition = findItemAndIndex(shuffledNumbers, time.getMinutes())
   const secondPosition = findItemAndIndex(shuffledNumbers, time.getSeconds())
 
-  // console.log(`Hours: ${hourPosition.item}, Minute: ${minutePosition.item}, Second: ${secondPosition.item}`)
-  // console.log(`Hours index: ${hourPosition.index}, Minute index ${minutePosition.index}, Second index ${secondPosition.index}`)
 
-  
   const randomClockNumbers = shuffledNumbers.map((num, index) => (
-    <div 
-      className="number-container"
-      style={{transform: `rotateZ(${(index)*6}deg)`}}  
-      key={num} 
-    >
-     <div className="number">{num}</div>
-    </div>
+    <ClockFace num={num} rotation={index*6} key={num} />
   ))
 
-  const listedOut = shuffledNumbers.map((num, index) => (
-    <div key={num}>
-      <div>{`number: ${num}, index: ${index}`}</div>
-    </div>
-  ))
-
-
-  //standard clock position
   const standardClock = numbers.map((num) => (
-    <div 
-      className="number-container"
-      style={{transform: `rotateZ(${num*6-5}deg)`}}  
-      key={num} 
-    >
-     <div className="number">{num}</div>
-    </div>
+    <ClockFace num={num} rotation={num*6-5} key={num} />
   ))
 
   return (
@@ -77,39 +50,37 @@ export function Clock() {
       <div className="clock">
         <div className="dot"></div>
         {randomClockNumbers}
-        <div
-          className="hour-hand"
-          style={{ transform: `rotateZ(${hourPosition.index * 6}deg)` }}
-        ></div>
-        <div
-          className="minute-hand"
-          style={{ transform: `rotateZ(${minutePosition.index * 6}deg)` }}
-        ></div>
-        <div
-          className="second-hand"
-          style={{ transform: `rotateZ(${secondPosition.index * 6}deg)` }}
-        ></div>
+        <ClockHand 
+          handType={"hour"}
+          rotation={hourPosition.index * 6}
+        />
+        <ClockHand 
+          handType={"minute"}
+          rotation={minutePosition.index * 6}
+        />
+        <ClockHand 
+          handType={"second"}
+          rotation={secondPosition.index * 6}
+        />
       </div>
       
-      {/* <div className='list-container'>
-        {listedOut}
-      </div> */}
+    {/* NORMAL CLOCK */}
       
       {/* <div className="clock">
         <div className="dot"></div>
         {standardClock}
-        <div
-          className="hour-hand"
-          style={{ transform: `rotateZ(${time.getHours() * 6 - 5}deg)` }}
-        ></div>
-        <div
-          className="minute-hand"
-          style={{ transform: `rotateZ(${time.getMinutes() * 6 - 5}deg)` }}
-        ></div>
-        <div
-          className="second-hand"
-          style={{ transform: `rotateZ(${time.getSeconds() * 6 - 5}deg)` }}
-        ></div>
+        <ClockHand 
+          handType={"hour"}
+          rotation={time.getHours() * 6 - 5}
+        />
+        <ClockHand 
+          handType={"minute"}
+          rotation={time.getMinutes() * 6 - 5}
+        />
+        <ClockHand 
+          handType={"second"}
+          rotation={time.getSeconds() * 6 - 5}
+        />
       </div> */}
     </div>
   );
